@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <map>
+
 using namespace std;
 
  
@@ -42,13 +44,17 @@ class Pencil {
         string hardness; // for graphite: h hb b f
         int sharpness;// 0 to 10 (0 - dull, 10 - sharp)
         int dullRate; // chars per sharpness point
+        map<string, int> hardnessToDullRate = {
+            {"", 10}, // Default
+            {"H", 20},
+            {"HB", 15},
+            {"F", 10},
+            {"B", 5}
+        };
+
 
         void setDullRate() {
-            if(hardness == "H") dullRate = 20;
-            else if (hardness == "HB") dullRate =15;
-            else if (hardness == "F") dullRate = 10;
-            else if (hardness == "B") dullRate = 5;
-            else dullRate = 10; // default
+            dullRate = hardnessToDullRate[hardness];
         }
         public: 
 
